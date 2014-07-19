@@ -4,7 +4,8 @@ import cgitb; cgitb.enable()
 import pwd, sys, os, cdb, subprocess
 from subprocess import check_output,Popen,PIPE
 
-home_dir="/home/XXXUSERXXX"
+from os.path import expanduser
+home_dir = expanduser("~")
 
 def check_form(formvars, form):
 	for varname in formvars:
