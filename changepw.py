@@ -3,8 +3,8 @@ import cgi
 import cgitb; cgitb.enable()
 import pwd, sys, os, cdb, subprocess
 from subprocess import check_output,Popen,PIPE
-
 from os.path import expanduser
+
 home_dir = expanduser("~")
 
 def check_form(formvars, form):
@@ -25,7 +25,7 @@ def check_oldpw(accountname, oldpw):
 	try:
 		cdb_user_data=db[accountname]
 	except:
-		return 'User not found.'
+		return 'User not found or password incorrect.'
 	passhash=cdb_user_data[6:40]
 	# Hash algorithm is given between first two $ of passhash (here only md5 based BSD password is used)
 	hashtype='1'
@@ -35,7 +35,7 @@ def check_oldpw(accountname, oldpw):
 	newhash = check_output(opensslargs).strip();
 	if newhash == passhash:
 		return ''
-	return 'Wrong password'
+	return 'User not found or password incorrect.'
 
 formvars = ['accountname', 'oldpass', 'newpass', 'newpass2']
 form = cgi.FieldStorage()
