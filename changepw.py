@@ -41,6 +41,7 @@ formvars = ['accountname', 'oldpass', 'newpass', 'newpass2']
 form = cgi.FieldStorage()
 if check_form(formvars, form) == '':
 	accountname = form['accountname'].value
+	accountname = accountname.split("@")[0]
 	oldpass = form['oldpass'].value
 	newpass = form['newpass'].value
 	newpass2 = form['newpass2'].value
